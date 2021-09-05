@@ -1,0 +1,65 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Class Timetable
+{% endblock %}
+
+{% block main %}
+
+    <h3>Class Timetable</h3>
+    <div class="table-responsive">
+        <table class="table table-sm table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Type</th>
+                    <th>Location</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for class in timetable %}
+                <tr>
+                    <td>{{ class.date }} <!-- TODO: Day --></td>
+                    <td>{{ class.start_time }}-{{ class.end_time }}</td>
+                    <td>{{ class.class_type }}</td>
+                    <td>{{ class.location }}</td>
+                    <td><button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#class{{ class.id }}" aria-expanded="false" aria-controls="class{{ class.id }}">Info</td>
+                </tr>
+                <tr class="collapse" id="class{{ class.id }}">
+                    <td colspan="5">
+                        <strong>Class size:</strong> {{ class.size }}<br>
+                        <strong>Place(s) available:</strong>
+                        {% if class.price and class.place_free > 0 %}
+                            {{ class.place_free }}
+                        {% elif class.price and class.place_free <= 0 %}
+                            <span style="color:red"><b>FULL!</b></span>
+                        {% endif %}
+                        <br>
+                        <strong>Price (HKD per head):</strong> {{ class.price }}<br>
+                        <strong>Remarks:</strong> {{ class.remarks }}<br>
+                        {% if class.price and class.place_free > 0 %}
+                        <hr>
+                        <form action="/timetable" method="post">
+                            <div style="display:none">
+                                <input type="number" name="class_id" value="{{ class.id }}" autocomplete="off" readonly>
+                            </div>
+                            <div class="form-group">
+                                <select class="form-control" name="to_book" required>
+                                    <option disabled selected value>Number of place I want to book ...</option>
+                                    {% for place in range(1, class.place_free + 1) %}
+                                        <option value="{{ place }}">{{ place }}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <button class="btn btn-warning" type="submit">Book this class!</button>
+                        </form>
+                        {% endif %}
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

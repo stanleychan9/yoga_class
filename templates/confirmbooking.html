@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Confirm Booking
+{% endblock %}
+
+{% block main %}
+    <h3>Please confirm the following booking information.</h3>
+    <p>After confirmation, please follow the instructions in the "Payment" page above to settle the payment. We will confirm your booking soon after your payment is handled.</p>
+    <form action="/confirmbooking" method="post">
+        <div style="display:none">
+            <input type="number" name="class_id" value="{{ target_class[0]["id"] }}" autocomplete="off" readonly>
+        </div>
+        <div class="form-group">
+            <label for="date" class="form-label">Date (Format: YYYY-MM-DD)</label>
+            <input type="text" class="form-control" id="date" name="date" value="{{ target_class[0]["date"] }}" autocomplete="off" readonly>
+        </div>
+        <div class="form-group">
+            <label for="start_time" class="form-label">Starting time</label>
+            <input type="text" class="form-control" id="start_time" name="start_time" value="{{ target_class[0]["start_time"] }}" autocomplete="off" readonly>
+        </div>
+        <div class="form-group">
+            <label for="end_time" class="form-label">Ending time</label>
+            <input type="text" class="form-control" id="end_time" name="end_time" value="{{ target_class[0]["end_time"] }}" autocomplete="off" readonly>
+        </div>
+        <div class="form-group">
+            <label for="class_type" class="form-label">Class type</label>
+            <input type="text" class="form-control" id="class_type" name="class_type" value="{{ target_class[0]["class_type"] }}" autocomplete="off" readonly>
+        </div>
+        <div class="form-group">
+            <label for="size" class="form-label">Class size</label>
+            <input type="number" class="form-control" id="size" name="size" value="{{ target_class[0]["size"] }}" autocomplete="off" readonly>
+        </div>
+        <div class="form-group">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" id="location" name="location" value="{{ target_class[0]["location"] }}" autocomplete="off" readonly>
+        </div>
+        <div class="form-group">
+            <label for="price" class="form-label">Price (HKD per head)</label>
+            <input type="number" class="form-control" id="price" name="price" value="{{ target_class[0]["price"] }}" autocomplete="off" readonly>
+        </div>
+        <div class="form-group">
+            <label for="price" class="form-label">Number of places to book</label>
+            <input type="number" class="form-control" id="to_book" name="to_book" value="{{ to_book }}" autocomplete="off" readonly>
+        </div>
+        <button class="btn btn-primary" type="submit">Confirm!</button>
+    </form>
+
+{% endblock %}

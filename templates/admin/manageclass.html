@@ -1,0 +1,93 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin: Manage Classes
+{% endblock %}
+
+{% block main %}
+
+    {% if error %}
+    <p><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+
+    <h3>Manage Classes</h3>
+    <div class="table-responsive">
+        <table class="table table-sm table-striped">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Time</th>
+                    <th>Type</th>
+                    <th>Location</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for class in timetable %}
+                <tr>
+                    <td>{{ class.date }} <!-- TODO: Day --></td>
+                    <td>{{ class.start_time }}-{{ class.end_time }}</td>
+                    <td>{{ class.class_type }}</td>
+                    <td>{{ class.location }}</td>
+                    <td><button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#class{{ class.id }}" aria-expanded="false" aria-controls="class{{ class.id }}">Manage</td>
+                </tr>
+                <tr class="collapse" id="class{{ class.id }}">
+                    <td colspan="5">
+                        <form action="/admin/manageclass" method="post">
+                            <div class="form-group">
+                                <label for="class_id" class="form-label">Class ID</label>
+                                <input type="number" class="form-control" id="class_id" name="class_id" value="{{ class.id }}" autocomplete="off" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="date" class="form-label">Date (Format: YYYY-MM-DD)</label>
+                                <input type="text" class="form-control" id="date" name="date" value="{{ class.date }}" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="start_time" class="form-label">Starting time (24-hour Format: HH:MM)</label>
+                                <input type="text" class="form-control" id="start_time" name="start_time" value="{{ class.start_time }}" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="end_time" class="form-label">Ending time (24-hour Format: HH:MM)</label>
+                                <input type="text" class="form-control" id="end_time" name="end_time" value="{{ class.end_time }}" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="class_type" class="form-label">Class type</label>
+                                <input type="text" class="form-control" id="class_type" name="class_type" value="{{ class.class_type }}" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="size" class="form-label">Class size</label>
+                                <input type="number" class="form-control" id="size" name="size" value="{{ class.size }}" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="place_free" class="form-label">Place available</label>
+                                <input type="number" class="form-control" id="place_free" name="place_free" value="{{ class.place_free }}" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="place_held" class="form-label">Place on hold</label>
+                                <input type="number" class="form-control" id="place_held" name="place_held" value="{{ class.place_held }}" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="place_booked" class="form-label">Place occupied</label>
+                                <input type="number" class="form-control" id="place_booked" name="place_booked" value="{{ class.place_booked }}" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="location" class="form-label">Location</label>
+                                <input type="text" class="form-control" id="location" name="location" value="{{ class.location }}" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="price" class="form-label">Price (HKD per head)</label>
+                                <input type="number" class="form-control" id="price" name="price" value="{{ class.price }}" autocomplete="off">
+                            </div>
+                            <div class="form-group">
+                                <label for="remarks" class="form-label">Remarks</label>
+                                <input type="text" class="form-control" id="remarks" name="remarks" value="{{ class.remarks }}" autocomplete="off">
+                            </div>
+                            <button class="btn btn-primary" type="submit">Change!</button>
+                        </form>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

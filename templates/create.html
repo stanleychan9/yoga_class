@@ -1,0 +1,52 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Create Account
+{% endblock %}
+
+{% block main %}
+    <h3>Create Account: All fields are required!</h3>
+    {% if error %}
+        <p><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+    <form action="/create" method="post">
+        <div class="mb-3">
+            <label for="nickname" class="form-label">Nickname: How do you want us to address you?</label>
+            <input type="text" class="form-control" id="nickname" name="nickname" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select class="form-control" id="gender" name="gender">
+                <option disabled selected value>Gender</option>
+                <option value="M">Male</option>
+                <option value="F">Female</option>
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="birthyear" class="form-label">Year of birth (Format: YYYY)</label>
+            <input type="number" class="form-control" id="birthyear" name="birthyear" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="username" class="form-label">Username <strong>(You will use it for logging in and make bookings.)</strong></label>
+            <input type="text" class="form-control" id="username" name="username" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address <strong>(Please provide a valid one. You will use it for many functions later.)</strong></label>
+            <input type="email" class="form-control" id="email" name="email" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone number <strong>(Please provide a local one. You will be contacted through Signal / Whatsapp of this number!)</strong></label>
+            <input type="number" class="form-control" id="phone" name="phone" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password <strong>(Use only letter(s) and number(s). Use at least one letter and at least one number!)</strong></label>
+            <input type="password" class="form-control" id="password" name="password" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="confirm_pw" class="form-label">Confirm password</label>
+            <input type="password" class="form-control" id="confirm_pw" name="confirm_pw" autocomplete="off">
+        </div>
+        <button class="btn btn-primary" type="submit">Create account!</button>
+    </form>
+
+{% endblock %}

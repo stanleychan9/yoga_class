@@ -1,0 +1,38 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My Account
+{% endblock %}
+
+{% block main %}
+    <h3>My Account: Change details as you wish</h3>
+    <br><strong>Current information of my account:</strong>
+    <br>Username: {{ user[0]["username"] }}
+    <br>Email address: {{ user[0]["email"] }}
+    <br>Phone number: {{ user[0]["phone"] }}
+    <hr>
+    <p>Enter information below that you want to change. If you wish to change the password, remember to fill in the "Confirm password" blank as well.</p>
+    <form action="/myaccount" method="post">
+        <div style="display:none">
+            <input type="number" name="user_id" value="{{ user[0]["id"] }}" autocomplete="off" readonly>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email address <strong>(Please provide a valid one. You will use it for many functions later.)</strong></label>
+            <input type="email" class="form-control" id="email" name="email" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="phone" class="form-label">Phone number <strong>(Please provide a local one. You will be contacted through Signal / Whatsapp of this number!)</strong></label>
+            <input type="number" class="form-control" id="phone" name="phone" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="password" class="form-label">Password <strong>(Use only letter(s) and number(s). Use at least one letter and at least one number!)</strong></label>
+            <input type="password" class="form-control" id="password" name="password" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="confirm_pw" class="form-label">Confirm password</label>
+            <input type="password" class="form-control" id="confirm_pw" name="confirm_pw" autocomplete="off">
+        </div>
+        <button class="btn btn-primary" type="submit">Proceed</button>
+    </form>
+
+{% endblock %}

@@ -1,0 +1,119 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin: Manage Bookings
+{% endblock %}
+
+{% block main %}
+    <h3>Manage Bookings</h3>
+    <h5>"ID" below refers to Booking ID.</h5>
+    <div class="table-responsive">
+        <table class="table table-sm table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Amount</th>
+                    <th>Status</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for booking in upcoming_bookings %}
+                <tr>
+                    <td>{{ booking["booking_id"] }}</td>
+                    <td>{{ booking["price"] * booking["places_booked"] }}</td>
+                    <td><span style="color:red"><b>{{ booking["status"] }}</b></span></td>
+                    <td>
+                        <form action="/admin/managebookings" method="post">
+                            <div style="display:none">
+                                <input type="number" name="booking_id" value="{{ booking["booking_id"] }}" autocomplete="off" readonly>
+                                <input type="number" name="class_id" value="{{ booking["class_id"] }}" autocomplete="off" readonly>
+                                <input type="number" name="places_booked" value="{{ booking["places_booked"] }}" autocomplete="off" readonly>
+                            </div>
+                            {% if booking["status"] == "Pending" %}
+                                <select class="form-select form-select-sm" name="new_status_from_pending">
+                                    <option disabled selected value>Change</option>
+                                    <option value="confirmed">Confirmed</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            {% elif booking["status"] == "Confirmed" %}
+                                <select class="form-select form-select-sm" name="new_status_from_confirmed">
+                                    <option disabled selected value>Change</option>
+                                    <option value="awaiting payment">Pending</option>
+                                    <option value="cancelled">Cancelled</option>
+                                </select>
+                            {% else %}<!-- If status is "Cancelled" -->
+                                <select class="form-select form-select-sm" name="new_status_from_cancelled">
+                                    <option disabled selected value>Change</option>
+                                    <option value="awaiting payment">Pending</option>
+                                    <option value="confirmed">Confirmed</option>
+                                </select>
+                            {% endif %}
+                            <button class="btn btn-warning" type="submit">Change</button>
+                        </form>
+                    </td>
+                    <td><button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#booking{{ booking["booking_id"] }}" aria-expanded="false" aria-controls="booking{{ booking["booking_id"] }}">Info</td>
+                </tr>
+                <tr class="collapse" id="booking{{ booking["booking_id"] }}">
+                    <td colspan="5">
+                        <strong>Nickname:</strong> {{ booking["nickname"] }}<br>
+                        <strong>Username:</strong> {{ booking["username"] }}<br>
+                        <strong>Email:</strong> {{ booking["email"] }}<br>
+                        <strong>Phone:</strong> {{ booking["phone"] }}<br>
+                        <strong>Booking time:</strong> {{ booking["booking_time"] }}<br>
+                        <strong>Class date: </strong> {{ booking["date"] }}<br>
+                        <strong>Class time: </strong> {{ booking["start_time"] }}-{{ booking["end_time"] }}<br>
+                        <strong>Class type:</strong> {{ booking["class_type"] }}<br>
+                        <strong>Class location:</strong> {{ booking["location"] }}<br>
+                        <strong>Class size:</strong> {{ booking["size"] }}<br>
+                        <strong>Price (HKD per head):</strong> {{ booking["price"] }}<br>
+                        <strong>Places booked:</strong> {{ booking["places_booked"] }}<br>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <h3>Past Bookings (for reference)</h3>
+    <h5>"ID" below refers to Booking ID.</h5>
+    <div class="table-responsive">
+        <table class="table table-sm table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Amount</th>
+                    <th>Final Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for booking in past_bookings %}
+                <tr>
+                    <td>{{ booking["booking_id"] }}</td>
+                    <td>{{ booking["price"] * booking["places_booked"] }}</td>
+                    <td><span style="color:red"><b>{{ booking["status"] }}</b></span></td>
+                    <td><button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#booking{{ booking["booking_id"] }}" aria-expanded="false" aria-controls="booking{{ booking["booking_id"] }}">Info</td>
+                </tr>
+                <tr class="collapse" id="booking{{ booking["booking_id"] }}">
+                    <td colspan="4">
+                        <strong>Nickname:</strong> {{ booking["nickname"] }}<br>
+                        <strong>Username:</strong> {{ booking["username"] }}<br>
+                        <strong>Email:</strong> {{ booking["email"] }}<br>
+                        <strong>Phone:</strong> {{ booking["phone"] }}<br>
+                        <strong>Booking time:</strong> {{ booking["booking_time"] }}<br>
+                        <strong>Class date: </strong> {{ booking["date"] }}<br>
+                        <strong>Class time: </strong> {{ booking["start_time"] }}-{{ booking["end_time"] }}<br>
+                        <strong>Class type:</strong> {{ booking["class_type"] }}<br>
+                        <strong>Class location:</strong> {{ booking["location"] }}<br>
+                        <strong>Class size:</strong> {{ booking["size"] }}<br>
+                        <strong>Price (HKD per head):</strong> {{ booking["price"] }}<br>
+                        <strong>Places booked:</strong> {{ booking["places_booked"] }}<br>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

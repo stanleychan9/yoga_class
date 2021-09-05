@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Payment
+{% endblock %}
+
+{% block main %}
+    <p class="h3">Payment Methods</p>
+    <hr>
+    <p class="h5">Fast Payment System (FPS)</p>
+    <ol>
+        <li>Transfer the correct amount of payment to the account with this FPS identifier: 123456789 <i>(This is not a real identifier.)</i>.
+            Alternatively, you can use the QR code at the end of this section.</li>
+        <li>Save the screenshot image that can prove your payment.</li>
+        <li>Send the image through Signal or Whatsapp to 12345678 <i>(This is not a real number.)</i>.
+            <strong>Remember to send us the Booking ID in your message as well!</strong> (The Booking ID can be found in your "My Bookings" page.)</li>
+    </ol>
+    <div class="text-center">
+        <p class="text-decoration-underline">FPS QR Code</p>
+        <img src="https://i.imgur.com/Q6xNtKR.png" alt="Sorry, the QR code is currently unavailable." width="200" height="200">
+    </div>
+    <hr>
+    <p class="h5">PayMe</p>
+    <ol>
+        <li>Transfer the correct amount of payment to the PayMe account with this phone number: 12345678 <i>(This is not a real number.)</i>.
+            Alternatively, you can use the QR code at the end of this section.</li>
+        <li>For the payment message, please input "ID=x", where x is your Booking ID. (The Booking ID can be found in your "My Bookings" page.)</li>
+        <li>Save the screenshot image that can prove your payment.</li>
+        <li>Send the image through Signal or Whatsapp to 12345678 <i>(This is not a real number.)</i>.
+            <strong>Remember to send us the Booking ID in your message as well!</strong></li>
+    </ol>
+    <div class="text-center">
+        <p class="text-decoration-underline">PayMe QR Code</p>
+        <img src="https://i.imgur.com/tRotYlL.png" alt="Sorry, the QR code is currently unavailable." width="200" height="200">
+    </div>
+    <hr>
+    <p class="h5">Bank Transfer</p>
+    <ol>
+        <li>Transfer the correct amount of payment to our HSBC account with this account number: 123-456789-01 <i>(This is not a real account.)</i>.
+        <li>Save the screenshot image or take photo of your payment receipt that can prove your payment.</li>
+        <li>Send the image through Signal or Whatsapp to 12345678 <i>(This is not a real number.)</i>.
+            <strong>Remember to send us the Booking ID in your message as well!</strong> (The Booking ID can be found in your "My Bookings" page.)</li>
+    </ol>
+
+{% endblock %}

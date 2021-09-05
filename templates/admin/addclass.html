@@ -1,0 +1,50 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Admin: Add Class
+{% endblock %}
+
+{% block main %}
+
+    {% if error %}
+    <p><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+
+    <h3>Add Classes</h3>
+    <form action="/admin/addclass" method="post">
+        <div class="mb-3">
+            <label for="date" class="form-label">Date (Format: YYYY-MM-DD) <i>(Required)</i></label>
+            <input type="text" class="form-control" id="date" name="date" placeholder="YYYY-MM-DD" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="start_time" class="form-label">Starting time (24-hour Format: HH:MM)</label>
+            <input type="text" class="form-control" id="start_time" name="start_time" placeholder="HH:MM" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="end_time" class="form-label">Ending time (24-hour Format: HH:MM)</label>
+            <input type="text" class="form-control" id="end_time" name="end_time" placeholder="HH:MM" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="class_type" class="form-label">Class type <i>(Required)</i></label>
+            <input type="text" class="form-control" id="class_type" name="class_type" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="size" class="form-label">Size</label>
+            <input type="number" class="form-control" id="size" name="size" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" id="location" name="location" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="price" class="form-label">Price (HKD per head)</label>
+            <input type="number" class="form-control" id="price" name="price" autocomplete="off">
+        </div>
+        <div class="mb-3">
+            <label for="remarks" class="form-label">Remarks</label>
+            <input type="text" class="form-control" id="remarks" name="remarks" autocomplete="off">
+        </div>
+        <button class="btn btn-primary" type="submit">Add Class!</button>
+    </form>
+
+{% endblock %}

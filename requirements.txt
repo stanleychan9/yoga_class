@@ -1,0 +1,12 @@
+os
+re
+cs50
+datetime
+flask
+flask_mail
+flask_session
+functools
+random
+tempfile
+werkzeug.exceptions
+werkzeug.security

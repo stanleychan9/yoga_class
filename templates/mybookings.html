@@ -1,0 +1,84 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    My Bookings
+{% endblock %}
+
+{% block main %}
+
+    <h3>Upcoming Bookings</h3>
+    <p>For "pending" classes, please follow the instructions in "Payment" page above (or click <a href="/payment" target"_blank">here</a>) to settle the payment. We will update the status soon after your payment is confirmed.</p>
+    <div class="table-responsive">
+        <table class="table table-sm table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Class Date</th>
+                    <th>Class Type</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for booking in upcoming_bookings %}
+                <tr>
+                    <td>{{ booking["booking_id"] }}</td>
+                    <td>{{ booking["date"] }}</td>
+                    <td>{{ booking["class_type"] }}</td>
+                    <td><span style="color:red"><b>{{ booking["status"] }}</b></span></td>
+                    <td><button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#booking{{ booking["booking_id"] }}" aria-expanded="false" aria-controls="booking{{ booking["booking_id"] }}">Info</td>
+                </tr>
+                <tr class="collapse" id="booking{{ booking["booking_id"] }}">
+                    <td colspan="5">
+                        <strong>Booking time:</strong> {{ booking["booking_time"] }}<br>
+                        <strong>Class time: </strong> {{ booking["start_time"] }}-{{ booking["end_time"] }}<br>
+                        <strong>Class location:</strong> {{ booking["location"] }}<br>
+                        <strong>Class size:</strong> {{ booking["size"] }}<br>
+                        <strong>Price (HKD per head):</strong> {{ booking["price"] }}<br>
+                        <strong>Places booked:</strong> {{ booking["places_booked"] }}<br>
+                        <strong>Total payment (HKD):</strong><span style="color:red"><b> {{ booking["price"] * booking["places_booked"] }}</b></span><br>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <hr>
+    <h3>Past Bookings</h3>
+    <div class="table-responsive">
+        <table class="table table-sm table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Class Date</th>
+                    <th>Class Type</th>
+                    <th>Status</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+            {% for booking in past_bookings %}
+                <tr>
+                    <td>{{ booking["booking_id"] }}</td>
+                    <td>{{ booking["date"] }}</td>
+                    <td>{{ booking["type"] }}</td>
+                    <td><span style="color:red"><b>{{ booking["status"] }}</b></span></td>
+                    <td><button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#booking{{ booking["booking_id"] }}" aria-expanded="false" aria-controls="booking{{ booking["booking_id"] }}">Info</td>
+                </tr>
+                <tr class="collapse" id="booking{{ booking["booking_id"] }}">
+                    <td colspan="5">
+                        <strong>Booking time:</strong> {{ booking["booking_time"] }}<br>
+                        <strong>Class time: </strong> {{ booking["start_time"] }}-{{ booking["end_time"] }}<br>
+                        <strong>Class location:</strong> {{ booking["location"] }}<br>
+                        <strong>Class size:</strong> {{ booking["size"] }}<br>
+                        <strong>Price (HKD per head):</strong> {{ booking["price"] }}<br>
+                        <strong>Places booked:</strong> {{ booking["places_booked"] }}<br>
+                        <strong>Total payment (HKD):</strong><span style="color:red"><b> {{ booking["price"] * booking["places_booked"] }}</b></span><br>
+                    </td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+
+{% endblock %}

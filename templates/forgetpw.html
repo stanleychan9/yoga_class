@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Forget Password
+{% endblock %}
+
+{% block main %}
+
+    <h3>Forget Password</h3>
+    <h5>Please enter your registered email.</h5>
+    <p>You will then receive an email with link to resetting your password.</p>
+
+    {% if error %}
+        <p><strong>Error:</strong> {{ error }}</p>
+    {% endif %}
+
+
+    <form action="/forgetpw" method="post">
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" autocomplete="off">
+        </div>
+        <button class="btn btn-primary" type="submit">Proceed</button>
+    </form>
+    <hr>
+    <p>Please contact us if you also forget your registered email.</p>
+
+{% endblock %}
